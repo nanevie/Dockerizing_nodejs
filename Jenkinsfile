@@ -23,8 +23,8 @@ def myCheckout(myGitUrl, myBranch, myLocalDir) {
 node () {
     stage ('Clone Git') {
         echo "Cloning git"
-        def trialGit = "https://github.com/nanevie/LearnJenkins"
-        def trial_branch = "*/testoper-testing"
+        def trialGit = "https://github.com/nanevie/Dockerizing_nodejs.git"
+        def trial_branch = "*/main"
         def local_dir = "nancygitjenkins"
         myCheckout(trialGit, trial_branch, local_dir)
 
@@ -44,21 +44,14 @@ node () {
         env.BASEPATH = CWDABSPATH  // set env var for BASEPATH
     }
 
-    stage ('clone a nodejs project') {
-        echo "Cloning git"
-        def trialGit = "https://github.com/nanevie/Dockerizing_nodejs.git"
-        def trial_branch = "*/main"
-        def local_dir = "nancygitjenkins"
-        myCheckout(trialGit, trial_branch, local_dir)
-
-
-    }
-
-    stage ('run tests') {
+    stage ('install and build') {
      sh '''#!/bin/bash -l  
-     cd nancygitjenkins/servers/express/api-with-express-and-handlebars/
+     cd nancygitjenkins/addressbook/
      npm install
-     npm test
+     cd ../
+     docker build -t evie0320/app_addressbook:v2 . 
+     docker push evie0320/app_addressbook
+       
       '''  
 
     }
