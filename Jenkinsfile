@@ -50,7 +50,9 @@ node () {
      npm install
      cd ../
      docker build -t evie0320/app_addressbook:v2 . 
+     docker login -u evie0320 -p Bm@ximus017
      docker push evie0320/app_addressbook
+
        
       '''  
 
