@@ -12,8 +12,8 @@ def myCheckout(myGitUrl, myBranch, myLocalDir) {
 node() {
     stage('clone the git') {
         echo "Cloning git"
-        def parthak8_url = "git@github.com:ParthaK8/dockerizing-nodejs"
-        def parthak8_branch = "*/nodejs-app-code"
+        def parthak8_url = "git@github.com:nanevie/Dockerizing_nodejs"
+        def parthak8_branch = "*/main"
         def local_dir = ""
         myCheckout(parthak8_url, parthak8_branch, local_dir)
 
@@ -33,7 +33,7 @@ node() {
     }
 
     stage('Build image') {
-            app = docker.build("parthakaushik/addressbook_app")
+            app = docker.build("evie0320/app_addressbook")
     }
     stage('Test image') {
     app.inside {
